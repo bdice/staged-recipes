@@ -89,11 +89,14 @@ outputs:
         - cuda-version {{ cuda_version }}
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-        - {{ pin_subpackage("libcublas", exact=True) }}
+        - libcublas =={{ version }}
       run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - libcublas-static >={{ version }}      # [linux]
     test:
+      requirements:
+        - {{ compiler("c") }}
+        - {{ compiler("cxx") }}
       commands:
         - test -L $PREFIX/lib/libcublas.so                                    # [linux]
         - test -L $PREFIX/lib/libcublasLt.so                                  # [linux]
@@ -115,6 +118,8 @@ outputs:
         - if not exist %LIBRARY_LIB%\cublas.lib exit 1                        # [win]
         - if not exist %LIBRARY_LIB%\cublasLt.lib exit 1                      # [win]
         - if not exist %LIBRARY_LIB%\nvblas.lib exit 1                        # [win]
+        # TODO: this test needs cuda-cudart and cuda-nvcc
+        #- g++ test.cpp -lcublas -I$CONDA_PREFIX/targets/{{ target_name }}/include -I$CONDA_PREFIX/include  # [linux]
     about:
       home: https://developer.nvidia.com/cublas
       license: LicenseRef-NVIDIA-End-User-License-Agreement
