@@ -34,20 +34,20 @@ build:
 
 test:
   commands:
-    - test -d $PREFIX/lib/cmake/thrust      # [linux]
-    - test -d $PREFIX/lib/cmake/cub         # [linux]
-    - test -d $PREFIX/lib/cmake/libcudacxx  # [linux]
-    - test -d $PREFIX/include/thrust        # [linux]
-    - test -d $PREFIX/include/cub           # [linux]
-    - test -d $PREFIX/include/cuda          # [linux]
-    - test -d $PREFIX/include/nv            # [linux]
-    - if not exist %LIBRARY_LIB%\cmake\thrust exit 1      # [win]
+    - test -d $PREFIX/include/cub                         # [linux]
+    - test -d $PREFIX/include/cuda                        # [linux]
+    - test -d $PREFIX/include/nv                          # [linux]
+    - test -d $PREFIX/include/thrust                      # [linux]
+    - test -d $PREFIX/lib/cmake/cub                       # [linux]
+    - test -d $PREFIX/lib/cmake/libcudacxx                # [linux]
+    - test -d $PREFIX/lib/cmake/thrust                    # [linux]
+    - if not exist %LIBRARY_INC%\cub exit 1               # [win]
+    - if not exist %LIBRARY_INC%\cuda exit 1              # [win]
+    - if not exist %LIBRARY_INC%\nv exit 1                # [win]
+    - if not exist %LIBRARY_INC%\thrust exit 1            # [win]
     - if not exist %LIBRARY_LIB%\cmake\cub exit 1         # [win]
     - if not exist %LIBRARY_LIB%\cmake\libcudacxx exit 1  # [win]
-    - if not exist %LIBRARY_INC%\thrust exit 1  # [win]
-    - if not exist %LIBRARY_INC%\cub exit 1     # [win]
-    - if not exist %LIBRARY_INC%\cuda exit 1    # [win]
-    - if not exist %LIBRARY_INC%\nv exit 1      # [win]
+    - if not exist %LIBRARY_LIB%\cmake\thrust exit 1      # [win]
 
 about:
   home: https://developer.nvidia.com/cuda-toolkit
@@ -57,9 +57,9 @@ about:
     - libcudacxx/LICENSE.TXT
   license: BSD-3-Clause AND Apache-2.0
   license_url: https://docs.nvidia.com/cuda/eula/index.html
-  summary: 'C++ Core Compute Libraries Documentation and Scripts'
+  summary: 'CUDA C++ Core Libraries'
   description: |
-    C++ Core Compute Libraries Documentation and Scripts
+    CUDA C++ Core Libraries
   doc_url: https://docs.nvidia.com/cuda/index.html
 
 extra:

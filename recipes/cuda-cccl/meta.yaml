@@ -39,23 +39,27 @@ outputs:
         - cuda-cccl-impl =={{ impl_version }}
     test:
       commands:
-        - test -d $PREFIX/targets/{{ target_name }}/lib      # [linux]
-        - test -d $PREFIX/lib/cmake  # [linux]
+        - test -d $PREFIX/lib/cmake                                    # [linux]
+        - test -d $PREFIX/targets/{{ target_name }}/include            # [linux]
+        - test -d $PREFIX/targets/{{ target_name }}/lib                # [linux]
+        - if not exist %LIBRARY_LIB%\{{ target_name }}\cmake exit 1    # [win]
+        - if not exist %LIBRARY_INC%\targets\{{ target_name }} exit 1  # [win]
     about:
       home: https://developer.nvidia.com/cuda-toolkit
       license_file: LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
-      summary: 'C++ Core Compute Libraries Documentation and Scripts'
+      summary: 'CUDA C++ Core Libraries'
       description: |
-        C++ Core Compute Libraries Documentation and Scripts
+        CUDA C++ Core Libraries
       doc_url: https://docs.nvidia.com/cuda/index.html
 
   - name: cuda-cccl_{{ target_platform }}
     build:
       noarch: generic
     files:
-      - targets  # [linux]
+      - targets/{{ target_name }}/include          # [linux]
+      - targets/{{ target_name }}/lib              # [linux]
       - Library\lib\x64\cmake                      # [win]
       - Library\include\targets\{{ target_name }}  # [win]
     requirements:
@@ -65,8 +69,8 @@ outputs:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
     test:
       commands:
-        - test -d $PREFIX/targets/{{ target_name }}/lib      # [linux]
-        - test -d $PREFIX/targets/{{ target_name }}/include  # [linux]
+        - test -d $PREFIX/targets/{{ target_name }}/lib                # [linux]
+        - test -d $PREFIX/targets/{{ target_name }}/include            # [linux]
         - if not exist %LIBRARY_LIB%\{{ target_name }}\cmake exit 1    # [win]
         - if not exist %LIBRARY_INC%\targets\{{ target_name }} exit 1  # [win]
     about:
@@ -74,9 +78,9 @@ outputs:
       license_file: LICENSE
       license: LicenseRef-NVIDIA-End-User-License-Agreement
       license_url: https://docs.nvidia.com/cuda/eula/index.html
-      summary: 'C++ Core Compute Libraries Documentation and Scripts'
+      summary: 'CUDA C++ Core Libraries'
       description: |
-        C++ Core Compute Libraries Documentation and Scripts
+        CUDA C++ Core Libraries
       doc_url: https://docs.nvidia.com/cuda/index.html
 
 about:
@@ -84,9 +88,9 @@ about:
   license_file: LICENSE
   license: LicenseRef-NVIDIA-End-User-License-Agreement
   license_url: https://docs.nvidia.com/cuda/eula/index.html
-  summary: 'C++ Core Compute Libraries Documentation and Scripts'
+  summary: 'CUDA C++ Core Libraries'
   description: |
-    C++ Core Compute Libraries Documentation and Scripts
+    CUDA C++ Core Libraries
   doc_url: https://docs.nvidia.com/cuda/index.html
 
 extra:
