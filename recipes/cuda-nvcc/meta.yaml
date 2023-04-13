@@ -41,10 +41,6 @@ test:
 
 outputs:
   - name: cuda-nvcc
-    build:
-      run_exports:
-        strong:
-          - __glibc >=2.17        # [linux]
     files:
       - bin/bin2c                # [linux]
       - bin/crt                  # [linux]
