@@ -27,7 +27,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [osx]
+  skip: true  # [osx or win]
 
 test:
   files:
@@ -44,7 +44,6 @@ outputs:
           - __glibc >=2.17        # [linux]
     files:
       - bin      # [linux]
-      - include  # [linux]
       - lib      # [linux]
       - nvvm     # [linux]
       - Library\nvvm  # [win]
